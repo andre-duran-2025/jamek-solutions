@@ -10,8 +10,7 @@ import {
   MapPin, 
   Send,
   MessageCircle,
-  Clock,
-  CheckCircle2
+  Clock
 } from "lucide-react";
 import { z } from "zod";
 
@@ -74,13 +73,14 @@ export default function Contato() {
   return (
     <Layout>
       {/* Hero */}
-      <section className="py-16 lg:py-24 bg-card border-b border-border">
-        <div className="container mx-auto px-4 lg:px-8">
+      <section className="relative py-20 lg:py-28 overflow-hidden">
+        <div className="absolute inset-0 dot-pattern opacity-40" />
+        <div className="container relative mx-auto px-6 lg:px-8">
           <div className="max-w-3xl">
             <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
               Entre em <span className="text-gradient">Contato</span>
             </h1>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg text-muted-foreground leading-relaxed">
               Estamos prontos para ajudar com seu projeto de automação. 
               Fale conosco e receba um atendimento personalizado.
             </p>
@@ -89,21 +89,21 @@ export default function Contato() {
       </section>
 
       {/* Contact Section */}
-      <section className="py-16 lg:py-24">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12">
+      <section className="py-20 lg:py-28">
+        <div className="container mx-auto px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-16">
             {/* Contact Info */}
             <div>
               <h2 className="text-2xl font-bold text-foreground mb-6">
                 Fale Conosco
               </h2>
-              <p className="text-muted-foreground mb-8">
+              <p className="text-muted-foreground mb-10 leading-relaxed">
                 Escolha a melhor forma de entrar em contato. Nossa equipe está 
                 pronta para atender suas necessidades e tirar todas as suas dúvidas.
               </p>
 
               {/* WhatsApp CTA */}
-              <div className="bg-success/10 rounded-xl p-6 mb-8">
+              <div className="bg-success/10 rounded-2xl p-6 mb-10">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-full bg-success flex items-center justify-center flex-shrink-0">
                     <MessageCircle className="w-6 h-6 text-success-foreground" />
@@ -115,9 +115,9 @@ export default function Contato() {
                     <p className="text-sm text-muted-foreground mb-4">
                       Resposta imediata em horário comercial
                     </p>
-                    <Button variant="success" onClick={handleWhatsApp}>
+                    <Button variant="success" className="rounded-full" onClick={handleWhatsApp}>
                       Iniciar conversa
-                      <MessageCircle className="w-4 h-4" />
+                      <MessageCircle className="w-4 h-4 ml-2" />
                     </Button>
                   </div>
                 </div>
@@ -126,7 +126,7 @@ export default function Contato() {
               {/* Contact Details */}
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
                     <Mail className="w-5 h-5 text-primary" />
                   </div>
                   <div>
@@ -136,7 +136,7 @@ export default function Contato() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
                     <Phone className="w-5 h-5 text-primary" />
                   </div>
                   <div>
@@ -146,7 +146,7 @@ export default function Contato() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
                     <MapPin className="w-5 h-5 text-primary" />
                   </div>
                   <div>
@@ -156,7 +156,7 @@ export default function Contato() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
                     <Clock className="w-5 h-5 text-primary" />
                   </div>
                   <div>
@@ -168,11 +168,11 @@ export default function Contato() {
             </div>
 
             {/* Contact Form */}
-            <div className="bg-card rounded-xl p-8 border border-border card-shadow">
+            <div className="bg-card rounded-2xl p-8 border border-border soft-shadow">
               <h3 className="text-xl font-semibold text-foreground mb-6">
                 Envie uma mensagem
               </h3>
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
                     Nome completo *
@@ -185,7 +185,7 @@ export default function Contato() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="bg-background"
+                    className="bg-background rounded-xl h-12"
                   />
                 </div>
 
@@ -201,7 +201,7 @@ export default function Contato() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="bg-background"
+                    className="bg-background rounded-xl h-12"
                   />
                 </div>
 
@@ -216,7 +216,7 @@ export default function Contato() {
                     placeholder="(11) 99999-9999"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="bg-background"
+                    className="bg-background rounded-xl h-12"
                   />
                 </div>
 
@@ -232,14 +232,13 @@ export default function Contato() {
                     onChange={handleChange}
                     required
                     rows={5}
-                    className="bg-background resize-none"
+                    className="bg-background resize-none rounded-xl"
                   />
                 </div>
 
                 <Button 
                   type="submit" 
-                  variant="industrial" 
-                  className="w-full" 
+                  className="w-full rounded-full h-12" 
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
@@ -247,7 +246,7 @@ export default function Contato() {
                   ) : (
                     <>
                       Enviar mensagem
-                      <Send className="w-4 h-4" />
+                      <Send className="w-4 h-4 ml-2" />
                     </>
                   )}
                 </Button>
