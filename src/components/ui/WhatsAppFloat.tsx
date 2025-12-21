@@ -1,9 +1,14 @@
 
 import { MessageCircle } from "lucide-react";
+import { useLocation } from "react-router-dom";
 
 export function WhatsAppFloat() {
+    const { pathname } = useLocation();
     const phone = "5519982184360";
     const message = encodeURIComponent("Olá! Gostaria de falar com a JAMEK Solutions.");
+
+    // Don't render on contact page
+    if (pathname === '/contato') return null;
 
     return (
         <div className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 flex items-center justify-end gap-4 group">
