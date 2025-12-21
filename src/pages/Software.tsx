@@ -1,17 +1,19 @@
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { 
-  Gauge, 
-  Wifi, 
-  WifiOff, 
-  AlertTriangle, 
+import {
+  Gauge,
+  Wifi,
+  WifiOff,
+  AlertTriangle,
   Activity,
   ArrowRight,
   Info,
   TrendingUp,
-  BarChart3,
-  Clock
+  Clock,
+  CheckCircle2,
+  XCircle,
+  ExternalLink
 } from "lucide-react";
 import {
   LineChart,
@@ -56,34 +58,72 @@ const alerts = [
 ];
 
 const stats = [
-  { 
-    icon: Wifi, 
-    label: "Equipamentos Online", 
-    value: "2", 
+  {
+    icon: Wifi,
+    label: "Equipamentos Online",
+    value: "2",
     color: "text-success",
-    bgColor: "bg-success/10" 
+    bgColor: "bg-success/10"
   },
-  { 
-    icon: WifiOff, 
-    label: "Equipamentos Offline", 
-    value: "1", 
+  {
+    icon: WifiOff,
+    label: "Equipamentos Offline",
+    value: "1",
     color: "text-destructive",
-    bgColor: "bg-destructive/10" 
+    bgColor: "bg-destructive/10"
   },
-  { 
-    icon: AlertTriangle, 
-    label: "Alertas Ativos", 
-    value: "2", 
+  {
+    icon: AlertTriangle,
+    label: "Alertas Ativos",
+    value: "2",
     color: "text-warning",
-    bgColor: "bg-warning/10" 
+    bgColor: "bg-warning/10"
   },
-  { 
-    icon: Activity, 
-    label: "Produção Atual", 
-    value: "3.1 MW", 
+  {
+    icon: Activity,
+    label: "Produção Atual",
+    value: "3.1 MW",
     color: "text-primary",
-    bgColor: "bg-primary/10" 
+    bgColor: "bg-primary/10"
   },
+];
+
+const benefits = [
+  {
+    title: "Monitoramento em Tempo Real",
+    desc: "Acompanhe cada detalhe da sua produção instantaneamente, de qualquer lugar."
+  },
+  {
+    title: "Manutenção Preditiva",
+    desc: "Antecipe falhas antes que elas parem sua produção, economizando tempo e dinheiro."
+  },
+  {
+    title: "Dashboards Personalizados",
+    desc: "Visualize os dados que realmente importam para o seu negócio."
+  },
+  {
+    title: "Alertas Inteligentes",
+    desc: "Receba notificações imediatas sobre anomalias ou paradas críticas."
+  }
+];
+
+const comparison = [
+  {
+    problem: "Falta de visibilidade da produção",
+    solution: "Dashboard completo e intuitivo em tempo real"
+  },
+  {
+    problem: "Manutenções corretivas frequentes",
+    solution: "Alertas preditivos e histórico de saúde dos ativos"
+  },
+  {
+    problem: "Dados dispersos em planilhas",
+    solution: "Centralização automática de dados na nuvem"
+  },
+  {
+    problem: "Tomada de decisão baseada em 'feeling'",
+    solution: "Decisões estratégicas baseadas em dados concretos"
+  }
 ];
 
 export default function Software() {
@@ -98,30 +138,105 @@ export default function Software() {
               <Gauge className="w-4 h-4 text-primary" />
               Plataforma IoT Industrial
             </div>
-            <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
+            <h1 className="text-4xl lg:text-6xl font-bold text-foreground mb-6">
               Software JAMEK
             </h1>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Demonstração das funcionalidades do sistema de monitoramento IoT industrial. 
-              Visualize dados em tempo real, alertas e métricas de performance dos seus equipamentos.
+            <p className="text-xl text-muted-foreground leading-relaxed mb-8">
+              A plataforma definitiva para controle operacional da sua indústria.
+              Transforme dados brutos em inteligência de negócio e aumente sua eficiência produtiva.
             </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 mb-12">
+              <Button size="lg" className="rounded-full px-8 group" asChild>
+                <a href="https://app.jameksolutions.com.br" target="_blank" rel="noopener noreferrer">
+                  Acessar Software JAMEK
+                  <ExternalLink className="w-4 h-4 ml-2" />
+                </a>
+              </Button>
+              <Button variant="outline" size="lg" className="rounded-full px-8" asChild>
+                <Link to="/contato">Agendar Demonstração</Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Demo Notice */}
-      <div className="bg-primary/5 border-y border-primary/20">
-        <div className="container mx-auto px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-center gap-2 text-sm text-primary font-medium">
-            <Info className="w-4 h-4" />
-            <span>Dados simulados para fins de demonstração</span>
+      {/* Problems vs Solutions */}
+      <section className="py-20 bg-secondary/30 border-y border-border/50">
+        <div className="container mx-auto px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-3xl font-bold text-foreground mb-4">
+              Por que modernizar com a JAMEK?
+            </h2>
+            <p className="text-muted-foreground">
+              Entenda como nossa tecnologia resolve os principais gargalos da indústria tradicional.
+            </p>
           </div>
+
+          <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+            <div className="space-y-6">
+              <div className="flex items-center gap-3 mb-6">
+                <XCircle className="w-6 h-6 text-destructive" />
+                <h3 className="text-xl font-bold text-foreground">Sem Monitoramento IoT</h3>
+              </div>
+              {comparison.map((item, index) => (
+                <div key={index} className="p-4 rounded-xl bg-destructive/5 border border-destructive/10">
+                  <p className="text-destructive/80 font-medium">{item.problem}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="space-y-6">
+              <div className="flex items-center gap-3 mb-6">
+                <CheckCircle2 className="w-6 h-6 text-success" />
+                <h3 className="text-xl font-bold text-foreground">Com Software JAMEK</h3>
+              </div>
+              {comparison.map((item, index) => (
+                <div key={index} className="p-4 rounded-xl bg-success/5 border border-success/10 shadow-sm">
+                  <p className="text-success/90 font-bold">{item.solution}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Grid */}
+      <section className="py-20 lg:py-28">
+        <div className="container mx-auto px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {benefits.map((benefit, index) => (
+              <div key={index} className="p-6 rounded-2xl bg-card border border-border hover:border-primary/50 transition-colors">
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                  <CheckCircle2 className="w-5 h-5 text-primary" />
+                </div>
+                <h3 className="text-lg font-bold text-foreground mb-2">{benefit.title}</h3>
+                <p className="text-sm text-muted-foreground">{benefit.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Live Demo Section Title */}
+      <div className="container mx-auto px-6 lg:px-8 pt-10">
+        <div className="text-center max-w-2xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-xs font-bold text-primary mb-4">
+            DEMONSTRAÇÃO INTERATIVA
+          </div>
+          <h2 className="text-3xl font-bold text-foreground mb-4">
+            Veja a plataforma em ação
+          </h2>
+          <p className="text-muted-foreground mb-8">
+            Explore abaixo um exemplo real do nosso dashboard de monitoramento.
+          </p>
         </div>
       </div>
 
-      {/* Dashboard */}
-      <section className="py-12 lg:py-16">
+      {/* Demo Dashboard (Existing Code) */}
+      <section className="pb-20 lg:pb-28">
         <div className="container mx-auto px-6 lg:px-8">
+
           {/* Stats Cards */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
             {stats.map((stat, index) => (
@@ -160,34 +275,34 @@ export default function Software() {
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={operationHistory}>
                     <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                    <XAxis 
-                      dataKey="time" 
+                    <XAxis
+                      dataKey="time"
                       stroke="hsl(var(--muted-foreground))"
                       fontSize={12}
                     />
-                    <YAxis 
+                    <YAxis
                       stroke="hsl(var(--muted-foreground))"
                       fontSize={12}
                     />
-                    <Tooltip 
-                      contentStyle={{ 
+                    <Tooltip
+                      contentStyle={{
                         backgroundColor: "hsl(var(--card))",
                         border: "1px solid hsl(var(--border))",
                         borderRadius: "12px"
                       }}
                     />
-                    <Line 
-                      type="monotone" 
-                      dataKey="value" 
-                      stroke="hsl(var(--primary))" 
+                    <Line
+                      type="monotone"
+                      dataKey="value"
+                      stroke="hsl(var(--primary))"
                       strokeWidth={2}
                       dot={{ fill: "hsl(var(--primary))" }}
                       name="Produção (%)"
                     />
-                    <Line 
-                      type="monotone" 
-                      dataKey="efficiency" 
-                      stroke="hsl(var(--success))" 
+                    <Line
+                      type="monotone"
+                      dataKey="efficiency"
+                      stroke="hsl(var(--success))"
                       strokeWidth={2}
                       dot={{ fill: "hsl(var(--success))" }}
                       name="Eficiência (%)"
@@ -210,29 +325,29 @@ export default function Software() {
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={performanceData} layout="vertical">
                     <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                    <XAxis 
-                      type="number" 
+                    <XAxis
+                      type="number"
                       domain={[0, 100]}
                       stroke="hsl(var(--muted-foreground))"
                       fontSize={12}
                     />
-                    <YAxis 
-                      type="category" 
+                    <YAxis
+                      type="category"
                       dataKey="name"
                       stroke="hsl(var(--muted-foreground))"
                       fontSize={12}
                       width={80}
                     />
-                    <Tooltip 
-                      contentStyle={{ 
+                    <Tooltip
+                      contentStyle={{
                         backgroundColor: "hsl(var(--card))",
                         border: "1px solid hsl(var(--border))",
                         borderRadius: "12px"
                       }}
                       formatter={(value) => [`${value}%`, 'Valor']}
                     />
-                    <Bar 
-                      dataKey="value" 
+                    <Bar
+                      dataKey="value"
                       fill="hsl(var(--primary))"
                       radius={[0, 6, 6, 0]}
                     />
@@ -257,24 +372,22 @@ export default function Software() {
                     className="flex items-center justify-between p-4 rounded-xl bg-secondary border border-border"
                   >
                     <div className="flex items-center gap-3">
-                      <div className={`w-3 h-3 rounded-full ${
-                        item.status === "online" ? "bg-success" :
+                      <div className={`w-3 h-3 rounded-full ${item.status === "online" ? "bg-success" :
                         item.status === "alert" ? "bg-warning animate-pulse" :
-                        "bg-destructive"
-                      }`} />
+                          "bg-destructive"
+                        }`} />
                       <span className="font-medium text-foreground">{item.name}</span>
                     </div>
                     <div className="flex items-center gap-4">
                       <span className="text-sm text-muted-foreground font-mono">
                         {item.production}
                       </span>
-                      <span className={`text-xs font-medium px-3 py-1 rounded-full ${
-                        item.status === "online" ? "bg-success/10 text-success" :
+                      <span className={`text-xs font-medium px-3 py-1 rounded-full ${item.status === "online" ? "bg-success/10 text-success" :
                         item.status === "alert" ? "bg-warning/10 text-warning" :
-                        "bg-destructive/10 text-destructive"
-                      }`}>
+                          "bg-destructive/10 text-destructive"
+                        }`}>
                         {item.status === "online" ? "Online" :
-                         item.status === "alert" ? "Alerta" : "Offline"}
+                          item.status === "alert" ? "Alerta" : "Offline"}
                       </span>
                     </div>
                   </div>
@@ -292,19 +405,17 @@ export default function Software() {
                 {alerts.map((alert, index) => (
                   <div
                     key={index}
-                    className={`p-4 rounded-xl border ${
-                      alert.type === "error" ? "bg-destructive/5 border-destructive/20" :
+                    className={`p-4 rounded-xl border ${alert.type === "error" ? "bg-destructive/5 border-destructive/20" :
                       alert.type === "warning" ? "bg-warning/5 border-warning/20" :
-                      "bg-primary/5 border-primary/20"
-                    }`}
+                        "bg-primary/5 border-primary/20"
+                      }`}
                   >
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex items-start gap-3">
-                        <div className={`w-2 h-2 rounded-full mt-2 ${
-                          alert.type === "error" ? "bg-destructive" :
+                        <div className={`w-2 h-2 rounded-full mt-2 ${alert.type === "error" ? "bg-destructive" :
                           alert.type === "warning" ? "bg-warning" :
-                          "bg-primary"
-                        }`} />
+                            "bg-primary"
+                          }`} />
                         <p className="text-sm text-foreground">{alert.message}</p>
                       </div>
                       <span className="text-xs text-muted-foreground whitespace-nowrap font-mono">
@@ -317,55 +428,42 @@ export default function Software() {
             </div>
           </div>
 
-          {/* Demo Notice Footer */}
-          <div className="bg-secondary rounded-2xl p-8 text-center mb-8">
-            <Info className="w-8 h-8 text-muted-foreground mx-auto mb-4" />
-            <p className="font-semibold text-foreground mb-2">
-              Demonstração Visual
-            </p>
-            <p className="text-sm text-muted-foreground max-w-xl mx-auto">
-              Esta é uma demonstração das funcionalidades do Software JAMEK. 
-              Os dados apresentados são simulados para ilustrar as capacidades do sistema.
-            </p>
-          </div>
+
 
           {/* CTA */}
-          <div className="relative rounded-3xl overflow-hidden">
+          <div className="relative rounded-3xl overflow-hidden mt-12">
             <div className="absolute inset-0 premium-gradient" />
             <div className="absolute inset-0 dot-pattern opacity-10" />
-            
+
             <div className="relative px-8 py-12 lg:py-16 text-center">
               <h2 className="text-2xl lg:text-3xl font-bold text-primary-foreground mb-4">
-                Quer ver o Software JAMEK em ação?
+                Pronto para otimizar sua produção?
               </h2>
               <p className="text-primary-foreground/80 mb-8 max-w-xl mx-auto">
-                Entre em contato e agende uma demonstração personalizada para sua indústria.
+                Tenha o controle total da sua indústria com o Software JAMEK.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   variant="secondary"
                   className="rounded-full px-8 bg-background text-foreground hover:bg-background/90"
                   asChild
                 >
-                  <Link to="/contato">
-                    Solicitar Demonstração
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Link>
+                  <a href="https://app.jameksolutions.com.br" target="_blank" rel="noopener noreferrer">
+                    Acessar Software JAMEK
+                    <ExternalLink className="w-4 h-4 ml-2" />
+                  </a>
                 </Button>
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   variant="outline"
-                  className="rounded-full px-8 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
+                  className="bg-transparent rounded-full px-8 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
                   asChild
                 >
-                  <a 
-                    href="https://wa.me/5511999999999" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                  >
-                    Fale pelo WhatsApp
-                  </a>
+                  <Link to="/contato">
+                    Falar com um Consultor
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Link>
                 </Button>
               </div>
             </div>

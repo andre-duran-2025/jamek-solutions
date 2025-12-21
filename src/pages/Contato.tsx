@@ -4,10 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
+import {
+  Mail,
+  Phone,
+  MapPin,
   Send,
   MessageCircle,
   Clock
@@ -41,21 +41,40 @@ export default function Contato() {
 
     try {
       const validated = contactSchema.parse(formData);
-      
-      // Simulate form submission
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
+      // Call backend API (works for both local proxy and Vercel production)
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Falha ao enviar e-mail');
+      }
+
       toast({
         title: "Mensagem enviada!",
         description: "Entraremos em contato em breve.",
       });
-      
+
       setFormData({ name: "", email: "", phone: "", message: "" });
     } catch (error) {
+      console.error("Erro ao enviar formulário:", error);
       if (error instanceof z.ZodError) {
         toast({
           title: "Erro no formulário",
           description: error.errors[0].message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Erro ao enviar",
+          description: error instanceof Error ? error.message : "Ocorreu um erro inesperado. Tente novamente.",
           variant: "destructive",
         });
       }
@@ -65,7 +84,7 @@ export default function Contato() {
   };
 
   const handleWhatsApp = () => {
-    const phone = "5511999999999";
+    const phone = "5519982184360";
     const message = encodeURIComponent("Olá! Gostaria de saber mais sobre os serviços da JAMEK Solutions.");
     window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
   };
@@ -73,15 +92,15 @@ export default function Contato() {
   return (
     <Layout>
       {/* Hero */}
-      <section className="relative py-20 lg:py-28 overflow-hidden">
-        <div className="absolute inset-0 dot-pattern opacity-40" />
+      <section className="relative py-20 lg:py-28 overflow-hidden bg-gradient-to-b from-background to-secondary/30">
+        <div className="absolute inset-0 grid-pattern opacity-10" />
         <div className="container relative mx-auto px-6 lg:px-8">
           <div className="max-w-3xl">
             <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
               Entre em <span className="text-gradient">Contato</span>
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Estamos prontos para ajudar com seu projeto de automação. 
+              Estamos prontos para ajudar com seu projeto de automação.
               Fale conosco e receba um atendimento personalizado.
             </p>
           </div>
@@ -98,24 +117,30 @@ export default function Contato() {
                 Fale Conosco
               </h2>
               <p className="text-muted-foreground mb-10 leading-relaxed">
-                Escolha a melhor forma de entrar em contato. Nossa equipe está 
+                Escolha a melhor forma de entrar em contato. Nossa equipe está
                 pronta para atender suas necessidades e tirar todas as suas dúvidas.
               </p>
 
               {/* WhatsApp CTA */}
-              <div className="bg-success/10 rounded-2xl p-6 mb-10">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-success flex items-center justify-center flex-shrink-0">
-                    <MessageCircle className="w-6 h-6 text-success-foreground" />
+              <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-2xl p-6 mb-10 border border-green-500/20 relative overflow-hidden group">
+                <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                  <MessageCircle className="w-24 h-24 text-green-500" />
+                </div>
+                <div className="relative z-10 flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0 shadow-lg shadow-green-500/20 group-hover:scale-110 transition-transform duration-300">
+                    <MessageCircle className="w-6 h-6 text-white" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-semibold text-foreground mb-1">
-                      Atendimento rápido via WhatsApp
+                    <h3 className="font-semibold text-foreground mb-1 text-lg">
+                      WhatsApp Comercial
                     </h3>
                     <p className="text-sm text-muted-foreground mb-4">
-                      Resposta imediata em horário comercial
+                      Resposta rápida para dúvidas técnicas e orçamentos.
                     </p>
-                    <Button variant="success" className="rounded-full" onClick={handleWhatsApp}>
+                    <Button
+                      className="rounded-full bg-green-500 hover:bg-green-600 text-white shadow-md hover:shadow-lg transition-all"
+                      onClick={handleWhatsApp}
+                    >
                       Iniciar conversa
                       <MessageCircle className="w-4 h-4 ml-2" />
                     </Button>
@@ -124,46 +149,22 @@ export default function Contato() {
               </div>
 
               {/* Contact Details */}
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-5 h-5 text-primary" />
+              <div className="space-y-4">
+                {[
+                  { icon: Mail, title: "E-mail", value: "contato@jamek.com.br", color: "text-blue-500", bg: "bg-blue-500/10" },
+                  { icon: Phone, title: "Telefone", value: "(19) 9 8218-4360", color: "text-indigo-500", bg: "bg-indigo-500/10" },
+                  { icon: Clock, title: "Horário", value: "Seg. a Sex: 08:00 - 18:00", color: "text-orange-500", bg: "bg-orange-500/10" }
+                ].map((item, index) => (
+                  <div key={index} className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border hover:border-primary/30 transition-all duration-300 hover:shadow-sm group">
+                    <div className={`w-12 h-12 rounded-xl ${item.bg} flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform`}>
+                      <item.icon className={`w-6 h-6 ${item.color}`} />
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-foreground text-sm mb-0.5">{item.title}</h4>
+                      <p className="text-muted-foreground font-medium">{item.value}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-medium text-foreground mb-1">E-mail</h4>
-                    <p className="text-muted-foreground">contato@jameksolutions.com.br</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-foreground mb-1">Telefone</h4>
-                    <p className="text-muted-foreground">+55 (11) 99999-9999</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-foreground mb-1">Localização</h4>
-                    <p className="text-muted-foreground">São Paulo, SP - Brasil</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <Clock className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-foreground mb-1">Horário</h4>
-                    <p className="text-muted-foreground">Segunda a Sexta: 08:00 - 18:00</p>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
 
@@ -213,7 +214,7 @@ export default function Contato() {
                     id="phone"
                     name="phone"
                     type="tel"
-                    placeholder="(11) 99999-9999"
+                    placeholder="(19) 9 8218-4360"
                     value={formData.phone}
                     onChange={handleChange}
                     className="bg-background rounded-xl h-12"
@@ -236,9 +237,9 @@ export default function Contato() {
                   />
                 </div>
 
-                <Button 
-                  type="submit" 
-                  className="w-full rounded-full h-12" 
+                <Button
+                  type="submit"
+                  className="w-full rounded-full h-12"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (

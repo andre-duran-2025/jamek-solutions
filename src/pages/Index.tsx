@@ -1,16 +1,19 @@
 import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
-import { 
-  ArrowRight, 
-  Cpu, 
-  Gauge, 
-  Wifi, 
+import {
+  ArrowRight,
+  Cpu,
+  Gauge,
+  Wifi,
   Zap,
   BarChart3,
-  Shield,
+  ShieldCheck,
   Settings2,
-  ChevronRight
+  ChevronRight,
+  CheckCircle2,
+  Clock,
+  Trophy
 } from "lucide-react";
 
 const services = [
@@ -37,10 +40,34 @@ const services = [
 ];
 
 const stats = [
-  { value: "150+", label: "Projetos Realizados" },
-  { value: "99.8%", label: "Uptime Garantido" },
-  { value: "24/7", label: "Suporte Técnico" },
-  { value: "12+", label: "Anos de Experiência" },
+  {
+    value: "150+",
+    label: "Projetos Realizados",
+    icon: CheckCircle2,
+    color: "text-primary",
+    bgColor: "bg-primary/10"
+  },
+  {
+    value: "99.8%",
+    label: "Uptime Garantido",
+    icon: ShieldCheck,
+    color: "text-success",
+    bgColor: "bg-success/10"
+  },
+  {
+    value: "24/7",
+    label: "Suporte Técnico",
+    icon: Clock,
+    color: "text-primary",
+    bgColor: "bg-primary/10"
+  },
+  {
+    value: "12+",
+    label: "Anos de Experiência",
+    icon: Trophy,
+    color: "text-warning",
+    bgColor: "bg-warning/10"
+  },
 ];
 
 export default function Index() {
@@ -52,7 +79,7 @@ export default function Index() {
         <div className="absolute inset-0 dot-pattern opacity-40" />
         <div className="absolute top-1/4 -right-1/4 w-[600px] h-[600px] rounded-full bg-primary/5 blur-3xl" />
         <div className="absolute bottom-1/4 -left-1/4 w-[400px] h-[400px] rounded-full bg-primary/10 blur-3xl" />
-        
+
         <div className="container relative mx-auto px-6 lg:px-8 py-20">
           <div className="max-w-4xl">
             {/* Badge */}
@@ -70,7 +97,7 @@ export default function Index() {
 
             {/* Subtitle */}
             <p className="text-lg lg:text-xl text-muted-foreground mb-10 max-w-2xl leading-relaxed animate-fade-in-up" style={{ animationDelay: "100ms" }}>
-              Soluções completas em automação, painéis elétricos e monitoramento IoT 
+              Soluções completas em automação, painéis elétricos e monitoramento IoT
               para otimizar seus processos e aumentar a produtividade.
             </p>
 
@@ -90,12 +117,21 @@ export default function Index() {
 
           {/* Floating stats card */}
           <div className="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2 animate-fade-in" style={{ animationDelay: "400ms" }}>
-            <div className="glass-card rounded-2xl p-6 w-72">
-              <div className="space-y-4">
+            <div className="glass-card rounded-2xl p-8 w-80 shadow-2xl backdrop-blur-xl border-primary/20 hover-lift">
+              <div className="space-y-8">
                 {stats.slice(0, 3).map((stat, index) => (
-                  <div key={index} className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">{stat.label}</span>
-                    <span className="text-lg font-bold text-foreground font-mono">{stat.value}</span>
+                  <div key={index} className="flex items-center gap-4 group">
+                    <div className={`w-12 h-12 rounded-xl ${stat.bgColor} flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-300`}>
+                      <stat.icon className={`w-6 h-6 ${stat.color}`} />
+                    </div>
+                    <div>
+                      <div className="text-3xl font-bold text-foreground font-mono leading-none mb-1">
+                        {stat.value}
+                      </div>
+                      <div className="text-sm font-medium text-muted-foreground">
+                        {stat.label}
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -109,7 +145,8 @@ export default function Index() {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-2 gap-6">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center">
+              <div key={index} className="flex flex-col items-center text-center p-4 rounded-xl bg-background border border-border">
+                <stat.icon className={`w-6 h-6 ${stat.color} mb-2`} />
                 <div className="text-2xl font-bold text-foreground font-mono">{stat.value}</div>
                 <div className="text-xs text-muted-foreground mt-1">{stat.label}</div>
               </div>
@@ -129,8 +166,8 @@ export default function Index() {
                 Soluções para sua indústria
               </h2>
             </div>
-            <Link 
-              to="/servicos" 
+            <Link
+              to="/servicos"
               className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors group"
             >
               Ver todos os serviços
@@ -164,7 +201,7 @@ export default function Index() {
       <section className="py-24 lg:py-32 bg-foreground relative overflow-hidden">
         {/* Background decoration */}
         <div className="absolute inset-0 grid-pattern opacity-5" />
-        
+
         <div className="container relative mx-auto px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Content */}
@@ -176,11 +213,11 @@ export default function Index() {
                 Software JAMEK
               </h2>
               <p className="text-lg text-background/70 mb-8 leading-relaxed">
-                Nossa plataforma IoT industrial permite o monitoramento em tempo real 
-                de todos os seus equipamentos, gerando insights para otimização de 
+                Nossa plataforma IoT industrial permite o monitoramento em tempo real
+                de todos os seus equipamentos, gerando insights para otimização de
                 processos e manutenção preditiva.
               </p>
-              
+
               <div className="space-y-4 mb-10">
                 {[
                   "Dashboard personalizado",
@@ -213,7 +250,7 @@ export default function Index() {
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   {[
                     { icon: Cpu, value: "24", label: "Equipamentos", color: "text-primary" },
-                    { icon: Shield, value: "99.8%", label: "Uptime", color: "text-success" },
+                    { icon: ShieldCheck, value: "99.8%", label: "Uptime", color: "text-success" },
                     { icon: BarChart3, value: "1.2k", label: "Leituras/min", color: "text-primary" },
                     { icon: Gauge, value: "85%", label: "Eficiência", color: "text-warning" },
                   ].map((stat, index) => (
@@ -224,14 +261,14 @@ export default function Index() {
                     </div>
                   ))}
                 </div>
-                
+
                 {/* Chart placeholder */}
                 <div className="h-40 bg-secondary rounded-xl flex items-end justify-center gap-2 px-4 pb-4">
                   {[40, 65, 45, 80, 55, 70, 60, 85, 50, 75, 65, 90].map((h, i) => (
                     <div
                       key={i}
                       className="flex-1 bg-primary/60 rounded-t-sm transition-all duration-1000"
-                      style={{ 
+                      style={{
                         height: `${h}%`,
                         animationDelay: `${i * 100}ms`
                       }}
@@ -251,18 +288,18 @@ export default function Index() {
             {/* Background */}
             <div className="absolute inset-0 premium-gradient" />
             <div className="absolute inset-0 dot-pattern opacity-10" />
-            
+
             <div className="relative px-8 py-16 lg:py-24 text-center">
               <h2 className="text-3xl lg:text-4xl font-bold text-primary-foreground mb-4">
                 Pronto para modernizar sua indústria?
               </h2>
               <p className="text-lg text-primary-foreground/80 mb-10 max-w-xl mx-auto">
-                Entre em contato e descubra como podemos transformar 
+                Entre em contato e descubra como podemos transformar
                 seus processos industriais com tecnologia de ponta.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   variant="secondary"
                   className="rounded-full px-8 bg-background text-foreground hover:bg-background/90"
                   asChild
@@ -272,15 +309,15 @@ export default function Index() {
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
                 </Button>
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   variant="outline"
-                  className="rounded-full px-8 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
+                  className="bg-transparent rounded-full px-8 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
                   asChild
                 >
-                  <a 
-                    href="https://wa.me/5511999999999" 
-                    target="_blank" 
+                  <a
+                    href="https://wa.me/5519982184360"
+                    target="_blank"
                     rel="noopener noreferrer"
                   >
                     WhatsApp

@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import { Settings2, Mail, Phone, MapPin, Linkedin } from "lucide-react";
+import { Settings2, Mail, Phone } from "lucide-react";
 
 export function Footer() {
   return (
     <footer className="bg-foreground text-primary-foreground">
-      <div className="container mx-auto px-4 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div className="container mx-auto px-4 lg:px-8 py-8 lg:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Brand */}
           <div className="space-y-4">
             <Link to="/" className="flex items-center gap-2">
@@ -25,7 +25,7 @@ export function Footer() {
           </div>
 
           {/* Links */}
-          <div>
+          <div className="hidden md:block">
             <h4 className="font-semibold mb-4">Navegação</h4>
             <ul className="space-y-2">
               {[
@@ -48,7 +48,7 @@ export function Footer() {
           </div>
 
           {/* Services */}
-          <div>
+          <div className="hidden md:block">
             <h4 className="font-semibold mb-4">Serviços</h4>
             <ul className="space-y-2 text-sm text-primary-foreground/70">
               <li>Automação Industrial</li>
@@ -65,29 +65,19 @@ export function Footer() {
             <ul className="space-y-3">
               <li className="flex items-center gap-2 text-sm text-primary-foreground/70">
                 <Mail className="w-4 h-4 text-primary" />
-                contato@jameksolutions.com.br
+                contato@jamek.com.br
               </li>
               <li className="flex items-center gap-2 text-sm text-primary-foreground/70">
                 <Phone className="w-4 h-4 text-primary" />
-                +55 (11) 99999-9999
+                (19) 9 8218-4360
               </li>
-              <li className="flex items-start gap-2 text-sm text-primary-foreground/70">
-                <MapPin className="w-4 h-4 text-primary mt-0.5" />
-                <span>São Paulo, SP - Brasil</span>
-              </li>
+
             </ul>
-            <div className="flex gap-3 mt-4">
-              <a
-                href="#"
-                className="w-9 h-9 rounded-lg bg-primary-foreground/10 flex items-center justify-center hover:bg-primary transition-colors"
-              >
-                <Linkedin className="w-4 h-4" />
-              </a>
-            </div>
+
           </div>
         </div>
 
-        <div className="border-t border-primary-foreground/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="border-t border-primary-foreground/10 mt-8 lg:mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-primary-foreground/50">
             © {new Date().getFullYear()} JAMEK Solutions. Todos os direitos reservados.
           </p>

@@ -191,8 +191,7 @@ export default function Cliente() {
                 </Button>
                 <Button 
                   size="lg" 
-                  variant="outline"
-                  className="rounded-full px-8 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
+                  className="rounded-full px-8 bg-[#25D366] hover:bg-[#128C7E] text-white border-none"
                   asChild
                 >
                   <a 

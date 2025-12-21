@@ -39,10 +39,10 @@ export function Header() {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group">
           <div className="relative">
-            <div className="w-10 h-10 rounded-xl premium-gradient flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
-              <span className="text-primary-foreground font-bold text-lg">J</span>
+            <div className="w-14 h-14 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-105 bg-white/10 overflow-hidden">
+              <img src="/logojamek.png" alt="JAMEK" className="w-full h-full object-cover" />
             </div>
-            <div className="absolute inset-0 rounded-xl premium-gradient opacity-0 blur-xl group-hover:opacity-50 transition-opacity duration-300" />
+            <div className="absolute inset-0 rounded-full bg-primary/20 opacity-0 blur-xl group-hover:opacity-50 transition-opacity duration-300" />
           </div>
           <div className="flex flex-col">
             <span className="text-lg font-bold text-foreground tracking-tight">

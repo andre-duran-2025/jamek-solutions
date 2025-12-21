@@ -1,73 +1,57 @@
-# Welcome to your Lovable project
+# JAMEK Solutions Showcase
 
-## Project info
+Aplicação web desenvolvida com React, TypeScript, Tailwind CSS e Shadcn UI para apresentar as soluções de automação industrial da JAMEK Solutions.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## 🚀 Tecnologias
 
-## How can I edit this code?
+- **Frontend:** React, Vite, TypeScript
+- **Estilização:** Tailwind CSS
+- **Componentes:** Shadcn UI (Radix UI)
+- **Roteamento:** React Router DOM
+- **Backend (Serverless):** Vercel Functions (Node.js)
+- **E-mail:** Resend API
 
-There are several ways of editing your application.
+## 🛠️ Como rodar localmente
 
-**Use Lovable**
+1. **Instale as dependências:**
+   ```bash
+   npm install
+   ```
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+2. **Configure as variáveis de ambiente:**
+   Crie um arquivo `.env` na raiz do projeto e adicione sua chave da API do Resend:
+   ```env
+   RESEND_API_KEY=sua_chave_aqui
+   ```
 
-Changes made via Lovable will be committed automatically to this repo.
+3. **Inicie o servidor de desenvolvimento (Frontend):**
+   ```bash
+   npm run dev
+   ```
+   Acesse: `http://localhost:8080`
 
-**Use your preferred IDE**
+4. **Inicie o servidor Backend (opcional para teste local do e-mail):**
+   Em outro terminal:
+   ```bash
+   node server.js
+   ```
+   *Nota: O projeto está configurado para redirecionar chamadas `/api` para o backend local durante o desenvolvimento.*
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 📦 Deploy na Vercel
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Este projeto está pronto para deploy na Vercel.
 
-Follow these steps:
+1. Faça o push do código para o GitHub.
+2. Importe o projeto no painel da Vercel.
+3. Nas configurações do projeto na Vercel, adicione a variável de ambiente:
+   - **Nome:** `RESEND_API_KEY`
+   - **Valor:** `sua_chave_do_resend`
+4. O Vercel detectará automaticamente a pasta `api/` e configurará as Serverless Functions.
+5. O build command padrão (`vite build`) funciona corretamente.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## 📁 Estrutura de Pastas Relevante
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+- `src/`: Código fonte do frontend
+- `api/`: Serverless Functions para deploy na Vercel
+- `public/`: Arquivos estáticos (logo, favicon)
+- `server.js`: Servidor local para desenvolvimento (backend)
