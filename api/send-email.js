@@ -31,12 +31,16 @@ export default async function handler(req, res) {
   }
 
   try {
-    console.log('Tentando enviar e-mail via Vercel Function para:', 'contato@jamek.com.br');
+    console.log('Tentando enviar e-mail via Vercel Function (v2) para:', 'contato@jamek.com.br');
+    console.log('Reply-To será definido como:', email);
     
     const data = await resend.emails.send({
       from: 'Jamek Site <onboarding@resend.dev>',
       to: 'contato@jamek.com.br',
       reply_to: email,
+      headers: {
+        'Reply-To': email
+      },
       subject: `Novo contato de: ${name}`,
       html: `
         <h2>Novo Contato via Site</h2>

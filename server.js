@@ -26,11 +26,16 @@ app.post('/api/send-email', async (req, res) => {
   const { name, email, phone, message } = req.body;
 
   try {
-    console.log('Tentando enviar e-mail para:', 'contato@jamek.com.br');
+    console.log('Tentando enviar e-mail (v2) para:', 'contato@jamek.com.br');
+    console.log('Reply-To será definido como:', email);
+    
     const data = await resend.emails.send({
       from: 'Jamek Site <onboarding@resend.dev>', // Custom display name with default Resend email
       to: 'contato@jamek.com.br', // Authorized email for testing
       reply_to: email,
+      headers: {
+        'Reply-To': email
+      },
       subject: `Novo contato de: ${name}`,
       html: `
         <h2>Novo Contato via Site</h2>
