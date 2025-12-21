@@ -36,6 +36,7 @@ export default async function handler(req, res) {
     const data = await resend.emails.send({
       from: 'Jamek Site <onboarding@resend.dev>',
       to: 'contato@jamek.com.br',
+      reply_to: email,
       subject: `Novo contato de: ${name}`,
       html: `
         <h2>Novo Contato via Site</h2>

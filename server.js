@@ -30,6 +30,7 @@ app.post('/api/send-email', async (req, res) => {
     const data = await resend.emails.send({
       from: 'Jamek Site <onboarding@resend.dev>', // Custom display name with default Resend email
       to: 'contato@jamek.com.br', // Authorized email for testing
+      reply_to: email,
       subject: `Novo contato de: ${name}`,
       html: `
         <h2>Novo Contato via Site</h2>
