@@ -44,6 +44,16 @@ app.post('/api/send-email', async (req, res) => {
         <p><strong>Telefone:</strong> ${phone || 'Não informado'}</p>
         <p><strong>Mensagem:</strong></p>
         <p>${message}</p>
+        <br/>
+        <hr/>
+        <p style="margin-top: 20px;">
+          <a href="mailto:${email}?subject=Re: Novo contato de ${name}" style="background-color: #000; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
+            Responder para ${email}
+          </a>
+        </p>
+        <p style="font-size: 12px; color: #666; margin-top: 10px;">
+          Se o botão não funcionar, responda para: ${email}
+        </p>
       `
     });
 
