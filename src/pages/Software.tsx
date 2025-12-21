@@ -148,7 +148,7 @@ export default function Software() {
 
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
               <Button size="lg" className="rounded-full px-8 group" asChild>
-                <a href="https://app.jameksolutions.com.br" target="_blank" rel="noopener noreferrer">
+                <a href="https://app.jamek.com.br" target="_blank" rel="noopener noreferrer">
                   Acessar Software JAMEK
                   <ExternalLink className="w-4 h-4 ml-2" />
                 </a>
@@ -449,7 +449,7 @@ export default function Software() {
                   className="rounded-full px-8 bg-background text-foreground hover:bg-background/90"
                   asChild
                 >
-                  <a href="https://app.jameksolutions.com.br" target="_blank" rel="noopener noreferrer">
+                  <a href="https://app.jamek.com.br" target="_blank" rel="noopener noreferrer">
                     Acessar Software JAMEK
                     <ExternalLink className="w-4 h-4 ml-2" />
                   </a>
