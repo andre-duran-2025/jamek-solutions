@@ -90,7 +90,7 @@ export default function Index() {
 
             {/* Main heading */}
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-foreground mb-6 leading-[1.1] animate-fade-in-up">
-              Transformamos a
+              Transformamos sua
               <span className="block text-gradient">indústria com</span>
               tecnologia inteligente
             </h1>
