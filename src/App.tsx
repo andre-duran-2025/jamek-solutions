@@ -33,6 +33,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
         <SpeedInsights />
+        <Analytics />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
